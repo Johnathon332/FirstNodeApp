@@ -10,4 +10,3 @@ router.patch('/:productId', productsController.updateProduct);
 router.delete('/:productId', productsController.removeProduct);
 
 export { router };
-

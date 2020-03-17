@@ -8,6 +8,4 @@ router.post('/', ordersController.createOrder);
 router.get('/:orderId', ordersController.getOrder);
 router.delete('/:orderId', ordersController.deleteOrder);
 
-export {
-    router
-};
+export { router };
