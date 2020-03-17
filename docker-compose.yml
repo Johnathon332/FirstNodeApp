@@ -1,0 +1,31 @@
+# Use root/example as user/password credentials
+version: '3.7'
+
+services:
+
+  db:
+    container_name: ocelot_db
+    image: mysql:latest
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'ocelot'
+      # So you don't have to use root, but you can if you like
+      MYSQL_USER: 'user'
+      # You can use whatever password you like
+      MYSQL_PASSWORD: 'password'
+      # Password for root access
+      MYSQL_ROOT_PASSWORD: 'password'
+      # Default schema
+      MYSQL_DATABASE: 'ocelot'
+    ports:
+      # <Port exposed> : < MySQL Port running inside container>
+      - '3306:3306'
+    expose:
+      # Opens port 3306 on the container
+      - '3306'
+      # Where our data will be persisted
+    volumes:
+      - ocelot-db:/var/lib/mysql
+volumes:
+    ocelot-db:
