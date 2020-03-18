@@ -3,13 +3,13 @@ import { Response, Request } from 'express-serve-static-core';
 class ProductsController {
   constructor() {}
 
-  getAllProducts(request: Request, response: Response): void {
+  public getAllProducts(request: Request, response: Response): void {
     response.status(200).json({
       message: 'Handling GET requests to /products',
     });
   }
 
-  getProduct(request: Request, response: Response): void {
+  public getProduct(request: Request, response: Response): void {
     const id = request.params.productId;
     if (id === 'special') {
       response.status(200).json({
@@ -23,7 +23,7 @@ class ProductsController {
     }
   }
 
-  createProduct(request: Request, response: Response): void {
+  public createProduct(request: Request, response: Response): void {
     const product = {
       name: request.body.name,
       price: request.body.price,
@@ -34,13 +34,13 @@ class ProductsController {
     });
   }
 
-  updateProduct(request: Request, response: Response): void {
+  public updateProduct(request: Request, response: Response): void {
     response.status(200).json({
       message: 'Updated product!',
     });
   }
 
-  removeProduct(request: Request, response: Response): void {
+  public removeProduct(request: Request, response: Response): void {
     const id: number = (request.params.productId as unknown) as number;
 
     response.status(200).json({
