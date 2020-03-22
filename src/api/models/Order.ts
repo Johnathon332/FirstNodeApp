@@ -1,38 +1,21 @@
-import { Model } from 'sequelize/types';
-import {
-  Table,
-  Column,
-  NotNull,
-  DataType,
-  PrimaryKey,
-  AutoIncrement,
-  ForeignKey,
-  CreatedAt,
-  UpdatedAt,
-  BelongsTo,
-} from 'sequelize-typescript';
 import { Product } from './Product';
 
-@Table
-export class Order extends Model<Order> {
-  @PrimaryKey
-  @AutoIncrement
-  @Column
+export class Order {
   public id!: number;
 
-  @ForeignKey(() => Product)
-  @Column
+  //@ts-ignore
+
   public productId!: number;
 
-  @BelongsTo(() => Product)
+  //@ts-ignore
+
   public product!: Product;
 
-  @Column(DataType.NUMBER)
   public quantity!: number;
 
-  @CreatedAt
+
   public createdAt!: Date;
 
-  @UpdatedAt
+
   public updatedAt!: Date;
 }

@@ -4,11 +4,12 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon -e ts  --exec \"npm run compile\"",
+    "start": "nodemon -e ts  --exec \"npm run debug\"",
     "test": "echo \"Error: no test specified\" && exit 1",
     "check": "gts check",
     "clean": "gts clean",
-    "compile": "tsc -p . && node --inspect build/server.js",
+    "debug": "tsc -p . && node --inspect build/server.js",
+    "compile": "tsc -p .",
     "fix": "gts fix",
     "prepare": "npm.cmd run compile",
     "pretest": "npm.cmd run compile",
@@ -20,10 +21,10 @@
   "dependencies": {
     "express": "^4.17.1",
     "morgan": "^1.9.1",
+    "mysql": "^2.18.1",
     "mysql2": "^2.1.0",
     "reflect-metadata": "^0.1.13",
-    "sequelize": "^5.21.5",
-    "sequelize-typescript": "^1.1.0"
+    "typeorm": "^0.2.24"
   },
   "devDependencies": {
     "@types/body-parser": "^1.19.0",
