@@ -1,21 +1,26 @@
 {
-  "extends": "./node_modules/gts/tsconfig-google.json",
-  "compilerOptions": {
-    "module": "commonjs",
-    "removeComments": true,
-    "sourceMap": true,
-    "target": "es5",
-    "outDir": "build",
-    "strict": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
-  },
-  "include": [
-    "src/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "src/**/*.spec.ts",
-    "src/**/__tests__/*.ts"
-  ]
-}
+   "extends": "./node_modules/gts/tsconfig-google.json",
+   "compilerOptions": {
+      "lib": [
+         "es5",
+         "es6"
+      ],
+     "module": "commonjs",
+     "moduleResolution": "node",
+     "removeComments": true,
+     "sourceMap": true,
+     "target": "es5",
+     "outDir": "build",
+     "strictPropertyInitialization": false,
+     "experimentalDecorators": true,
+     "emitDecoratorMetadata": true
+   },
+   "include": [
+     "src/**/*.ts"
+   ],
+   "exclude": [
+     "node_modules",
+     "src/**/*.spec.ts",
+     "src/**/__tests__/*.ts"
+   ]
+ }

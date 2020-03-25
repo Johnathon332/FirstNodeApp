@@ -1,21 +1,13 @@
 import { Product } from './Product';
+import { Entity, PrimaryGeneratedColumn, ManyToOne, OneToMany } from 'typeorm';
+import { OrderToProduct } from './OrderToProduct';
+import { DbEntity } from './DbEntity';
 
-export class Order {
-  public id!: number;
-
-  //@ts-ignore
-
-  public productId!: number;
-
-  //@ts-ignore
-
-  public product!: Product;
-
-  public quantity!: number;
-
-
-  public createdAt!: Date;
-
-
-  public updatedAt!: Date;
+@Entity()
+export class Order extends DbEntity {
+  @OneToMany(
+    type => OrderToProduct,
+    orderToProduct => orderToProduct.order
+  )
+  public products!: OrderToProduct[];
 }

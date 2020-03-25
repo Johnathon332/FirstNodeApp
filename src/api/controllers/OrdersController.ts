@@ -1,4 +1,9 @@
 import { Response, Request } from 'express-serve-static-core';
+import { Order } from '../models/Order';
+import { Repository, getRepository, In } from 'typeorm';
+import { Product } from '../models/Product';
+import { CustomRequest } from '../../extensions/modules';
+import { OrderPayload } from '../models/requests/OrderPayload';
 
 class OrdersController {
   constructor() {}
@@ -16,15 +21,19 @@ class OrdersController {
     });
   }
 
-  public createOrder(request: Request, response: Response): void {
-    const order = {
-      productId: request.body.productId,
-      quantity: request.body.quantity,
-    };
+  public async createOrder(
+    request: CustomRequest<OrderPayload>,
+    response: Response
+  ): Promise<void> {
+    const order: Order = new Order();
+
+    order.products = request.body.products;
+
+    const savedOrder: Order = await getRepository(Order).save(order);
 
     response.status(201).json({
       message: 'Order was created',
-      order,
+      savedOrder,
     });
   }
 

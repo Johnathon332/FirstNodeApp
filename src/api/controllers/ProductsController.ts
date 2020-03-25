@@ -1,7 +1,10 @@
 import { Response, Request } from 'express-serve-static-core';
+import { Product } from '../models/Product';
+import { Repository, getRepository } from 'typeorm';
 
 class ProductsController {
-  constructor() {}
+  constructor() {
+  }
 
   public getAllProducts(request: Request, response: Response): void {
     response.status(200).json({
@@ -24,10 +27,14 @@ class ProductsController {
   }
 
   public createProduct(request: Request, response: Response): void {
-    const product = {
+    const repo: Repository<Product> = getRepository(Product);
+    const product: Product = {
       name: request.body.name,
       price: request.body.price,
     };
+
+    repo.save(product);
+
     response.status(201).json({
       message: 'Handling POST requests to /products',
       createdProduct: product,

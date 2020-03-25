@@ -1,13 +1,11 @@
+import { CreateDateColumn, Entity, UpdateDateColumn, Column } from 'typeorm';
+import { DbEntity } from './DbEntity';
 
-export class Product {
+@Entity()
+export class Product extends DbEntity {
+  @Column()
+  public name: string;
 
-  public id!: number;
-
-  public name!: string;
-
-  public price!: number;
-
-  public readonly createdAt!: Date;
-
-  public readonly updatedAt!: Date;
+  @Column('decimal', { precision: 7, scale: 2, default: 0 })
+  public price: number;
 }
