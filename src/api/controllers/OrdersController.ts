@@ -1,7 +1,7 @@
 import { Response, Request } from 'express-serve-static-core';
-import { Order } from '../models/Order';
+import { Order } from '../models/entities/Order';
 import { Repository, getRepository, In } from 'typeorm';
-import { Product } from '../models/Product';
+import { Product } from '../models/entities/Product';
 import { CustomRequest } from '../../extensions/modules';
 import { OrderPayload } from '../models/requests/OrderPayload';
 
@@ -40,7 +40,7 @@ class OrdersController {
   public deleteOrder(request: Request, response: Response): void {
     response.status(200).json({
       message: 'Order deleted',
-      orderId: request.params.orderId,
+      orderId: request.params.orderId
     });
   }
 }

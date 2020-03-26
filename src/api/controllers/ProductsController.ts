@@ -1,10 +1,9 @@
 import { Response, Request } from 'express-serve-static-core';
-import { Product } from '../models/Product';
+import { Product } from '../models/entities/Product';
 import { Repository, getRepository } from 'typeorm';
 
 class ProductsController {
-  constructor() {
-  }
+  constructor() {}
 
   public getAllProducts(request: Request, response: Response): void {
     response.status(200).json({

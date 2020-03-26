@@ -1,14 +1,14 @@
 {
    "type": "mysql",
-   "host": "localhost",
+   "host": "127.0.0.1",
    "port": 3306,
    "username": "user",
    "password": "password",
    "database": "firstnodeapp",
    "synchronize": true,
-   "logging": false,
+   "logging": true,
    "entities": [
-      "src/api/models/**/*.ts"
+      "build/api/models/entities/**/*.js"
    ],
    "migrations": [
       "src/migration/**/*.ts"
@@ -17,7 +17,7 @@
       "src/subscriber/**/*.ts"
    ],
    "cli": {
-      "entitiesDir": "src/api/models",
+      "entitiesDir": "src/api/models/entities",
       "migrationsDir": "src/migration",
       "subscribersDir": "src/subscriber"
    }

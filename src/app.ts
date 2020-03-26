@@ -19,54 +19,50 @@ export class Application {
    * This does initialisation work on the express application
    */
   constructor() {
-    createConnection().then(() => {
-      this.app = express();
+    createConnection();
 
-      this.app.use(express.urlencoded({ extended: false }));
-      this.app.use(express.json());
+    this.app = express();
 
-      routeMappings.forEach((routeMapping: Route) => {
-        this.app.use(routeMapping.route, routeMapping.router);
-      });
+    this.app.use(express.urlencoded({ extended: false }));
+    this.app.use(express.json());
 
-      this.app.use((req: Request, res: Response, next: NextFunction) => {
-        res.header('Access-Control-Allow-Origin', '*');
-        res.header(
-          'Access-Control-Allow-Headers',
-          'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-        );
-
-        if (req.method === 'OPTIONS') {
-          res.header(
-            'Access-Control-Allow-Methods',
-            'PUT, POST, PATCH, DELETE, GET'
-          );
-          return res.status(200).json({});
-        }
-        return next();
-      });
-
-      this.app.use((req: Request, res: Response, next: NextFunction) => {
-        const error: ResponseError = new Error('Not found') as ResponseError;
-        error.status = 404;
-        next(error);
-      });
-
-      this.app.use(
-        (
-          error: ResponseError,
-          req: Request,
-          res: Response,
-          next: NextFunction
-        ) => {
-          res.status(error.status || 500).json({
-            error: {
-              message: error.message,
-            },
-          });
-        }
+    this.app.use((req: Request, res: Response, next: NextFunction) => {
+      res.header('Access-Control-Allow-Origin', '*');
+      res.header(
+        'Access-Control-Allow-Headers',
+        'Origin, X-Requested-With, Content-Type, Accept, Authorization'
       );
+
+      if (req.method === 'OPTIONS') {
+        res.header(
+          'Access-Control-Allow-Methods',
+          'PUT, POST, PATCH, DELETE, GET'
+        );
+        return res.status(200).json({});
+      }
+      return next();
     });
+
+    // this.app.use((req: Request, res: Response, next: NextFunction) => {
+    //   const error: ResponseError = new Error('Not found') as ResponseError;
+    //   error.status = 404;
+    //   next(error);
+    // });
+
+    // this.app.use(
+    //   (
+    //     error: ResponseError,
+    //     req: Request,
+    //     res: Response,
+    //     next: NextFunction
+    //   ) => {
+    //     res.status(error.status || 500).json({
+    //       error: {
+    //         message: error.message,
+    //       },
+    //     });
+    //   }
+    // );
   }
 
   /**
@@ -82,6 +78,19 @@ export class Application {
    */
   public build(): express.Application {
     return this.app;
+  }
+
+  public getRoutes() {
+    return routeMappings;
+  }
+
+  public registerRoutes(): Application {
+    for (let i = 0; i < routeMappings.length; i++) {
+      console.log(routeMappings[i]);
+      this.app.use(routeMappings[i].route, routeMappings[i].router);
+    }
+
+    return this;
   }
 }
 

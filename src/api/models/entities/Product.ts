@@ -1,5 +1,5 @@
-import { CreateDateColumn, Entity, UpdateDateColumn, Column } from 'typeorm';
-import { DbEntity } from './DbEntity';
+import { Entity, Column } from 'typeorm';
+import { DbEntity } from '../DbEntity';
 
 @Entity()
 export class Product extends DbEntity {
